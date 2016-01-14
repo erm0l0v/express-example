@@ -1,0 +1,35 @@
+{
+  "name": "express-example",
+  "version": "0.0.1",
+  "description": "It is an express app.",
+  "scripts": {
+    "debug": "nodemon --debug --cwd ./.dist --watch server --watch config server/index.js",
+    "production-dist": "gulp clean && gulp fresh-dist --type production",
+    "start": "nodemon --cwd ./.dist --watch server --watch config server/index.js",
+    "test": "npm run production-dist && node test/*",
+    "watch": "gulp dev"
+  },
+  "author": "Kirill Ermolov",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/erm0l0v/express-example"
+  },
+  "bugs": {
+    "url": "https://github.com/erm0l0v/express-example/issues"
+  },
+  "homepage": "https://github.com/erm0l0v/express-example/issues",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^3.8.7",
+    "gulp-rimraf": "^0.1.0",
+    "gulp-ruby-sass": "^0.7.1",
+    "nodemon": "^1.2.1",
+    "run-sequence": "^0.3.6",
+    "supertest": "^0.13.0",
+    "tape": "^3.0.2"
+  },
+  "dependencies": {
+    "express": "^4.8.3",
+    "nconf": "^0.6.9"
+  }
+}
