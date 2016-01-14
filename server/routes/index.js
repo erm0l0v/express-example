@@ -1,14 +1,20 @@
 'use strict';
 var express = require('express');
 
+var db = require('../db');
+
 module.exports = function (staticDir) {
-  var router = express.Router();
+    var router = express.Router();
 
-  router.use(express.static(staticDir));
+    router.use(express.static(staticDir));
 
-  router.get('/', function(req, res) {
-    res.send('hi');
-  });
+    router.get('/', function (req, res) {
+        var collection = db.get().collection('comments');
 
-  return router;
+        collection.find().toArray(function (err, docs) {
+            res.json({comments: docs});
+        });
+    });
+
+    return router;
 };

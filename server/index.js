@@ -3,29 +3,38 @@ var express = require('express');
 
 var Config = require('./config');
 var Routes = require('./routes');
+var db = require('./db');
 
 var Server = function (options) {
-  var app = express();
-  var config = Config(options);
+    var app = express();
+    var config = Config(options);
 
-  // set up routes, mapping the .dist/client dir to be served as static content
-  var staticDir = './client';
-  app.use('/', Routes(staticDir));
+    // set up routes, mapping the .dist/client dir to be served as static content
+    var staticDir = './client';
+    app.use('/', Routes(staticDir));
 
-  return {
-    app: app,
-    start: function() {
-      var port = config.get('port');
+    return {
+        app: app,
+        start: function () {
+            var port = config.get('port');
 
-      app.listen(port, function () {
-        console.log('Express server listening on port %d in %s mode', port, app.get('env'));
-      });
-    }
-  };
+            db.connect(config.get('mongoUrl'), function (err) {
+                if (err) {
+                    console.log('Unable to connect to Mongo.');
+                    process.exit(1);
+                }
+                else {
+                    app.listen(port, function () {
+                        console.log('Express server listening on port %d in %s mode', port, app.get('env'));
+                    });
+                }
+            });
+        }
+    };
 };
 
 if (require.main === module) {
-  Server().start();
+    Server().start();
 }
 
 module.exports = Server;
