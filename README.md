@@ -1,41 +1,25 @@
 express-example
 ===============
 
-It is an express app.
+It is an express test app.
 
 
 Requirements
 ------------
 
-- nodejs
+- Docker
 
 
 Setup
 -----
 
-First, run `npm install` to get the requisite node modules.
+* Install Docker [Windows](https://docs.docker.com/engine/installation/windows/) [Mac OS](https://docs.docker.com/engine/installation/mac/)
+* Create [Docker Machine](https://docs.docker.com/machine/get-started/)
 
 
 Usage
 -----
 
-Get cooking with these `npm run` tasks:
+`docker-compose run --rm web npm run lint` - run js lint
 
-`npm run watch` will start building a development distribution and keep it up to
-date when files are edited. This should be run in one terminal, then in a
-seperate terminal run `npm run start` or `npm run debug`.
-
-`npm run start` will start run the app server in dev mode, reachable at
-[http://localhost:8080](http://localhost:8080).
-Any changes to server code the will automatically restart the app.
-
-`npm run debug` similar to `npm run start`, but runs the app in debug mode. This
-is intended to be used with
-[node-inspector](https://github.com/node-inspector/node-inspector) also running
-so app can be inspected via breakpoints and **debugger** statements.
-
-`npm run production-dist` will make a distribution suitable for deploying to
-production environments. A self-contained build of the appplication will be
-created and placed in `.dist/`
-
-`npm run test` will run the test suite.
+`docker-compose up` - start appication
